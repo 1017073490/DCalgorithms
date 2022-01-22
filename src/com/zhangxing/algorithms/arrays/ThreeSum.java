@@ -7,7 +7,39 @@ import java.util.List;
 public class ThreeSum {
     public static void main(String[] args) {
         int[] input = {-1, 0, 1, 2, -1, -4};
-        System.out.println(new ThreeSum().threeSum(input));
+        System.out.println(new ThreeSum().threeSumByMy(input));
+    }
+
+    public List<List<Integer>> threeSumByMy(int[] nums) {
+        List<List<Integer>> resList = new ArrayList<>();
+        if (nums == null || nums.length == 1 || nums.length == 2) {
+            return resList;
+        }
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length - 2; i++) {
+            if (nums[i] > 0) break;
+            if (i >= 1 && nums[i] == nums[i - 1]) continue;
+            int left = i + 1;
+            int right = nums.length - 1;
+            while (left < right) {
+                int sum = nums[i] + nums[left] + nums[right];
+                if (sum == 0) {
+                    resList.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    // 这里面也要变化
+                    left++;
+                    right--;
+                    // 内部也要有重复的验证
+                    while (left < right && nums[left] == nums[left - 1]) left++;
+                    while (left < right && nums[right] == nums[right+ 1]) right--;
+                } else if (sum < 0) {
+                    left++;
+                } else {
+                    right--;
+                }
+            }
+
+        }
+        return resList;
     }
 
     public List<List<Integer>> threeSum(int[] nums) {

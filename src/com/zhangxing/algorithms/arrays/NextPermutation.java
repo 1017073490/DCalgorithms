@@ -5,13 +5,40 @@ public class NextPermutation {
     public static void main(String[] args) {
         int[] input = {3, 2, 1};
         NextPermutation nextPermutation = new NextPermutation();
-        nextPermutation.nextPermutation(input);
+        nextPermutation.nextPermutationMy(input);
         for (int i : input) {
             System.out.println(i);
         }
-
     }
-
+    private static void swapMy(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+    private static void fanzhuan(int[] nums, int start, int end) {
+        while (start < end) {
+            swapMy(nums, start, end);
+            start++;
+            end--;
+        }
+    }
+    public void nextPermutationMy(int[] nums) {
+        int tar = nums.length - 2;
+        while (tar >= 0 && nums[tar] >= nums[tar + 1]) {
+            tar--;
+        }
+        if (tar == -1) {
+            fanzhuan(nums, 0, nums.length - 1);
+            return;
+        }
+        int res = tar + 2;
+        while (res < nums.length && nums[tar] < nums[res]) {
+            res++;
+        }
+        swap(nums, tar, res - 1);
+        // 剩下直接反转
+        fanzhuan(nums, tar + 1, nums.length - 1);
+    }
     public void nextPermutation(int[] nums) {
         // 思路：从后向前，找到升序子序列，然后调整子序列的最高位，剩余部分升序排列
         int length = nums.length;

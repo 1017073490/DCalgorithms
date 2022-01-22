@@ -5,14 +5,29 @@ public class ReverseLinkedList {
 
     }
 
+    public ListNode reverseListByMy(ListNode head) {
+        ListNode curNode = head;
+        ListNode prevNode = null;
+        while (curNode != null) {
+            ListNode next = curNode.next;
+            curNode.next = prevNode;
+            prevNode = curNode;
+            curNode = next;
+        }
+        return prevNode;
+    }
+
     public ListNode reverseList(ListNode head) {
         // 定义两个指针，指向当前访问的节点、上一个节点
         ListNode curNode = head;
         ListNode prevNode = null;
         // 依次迭代链表中的节点，将 next 指向 prev
         while (curNode != null) {
+            // 先将 curNode 的 next 保存下来，这样就可以保存迭代下去
             ListNode tempNode = curNode.next;
+            // 当前的节点的 next 指向前一个节点，那么就完成了当前节点的反转
             curNode.next = prevNode;
+            // 然后 prev 和 cur 分别前移一个
             prevNode = curNode;
             curNode = tempNode;
         }

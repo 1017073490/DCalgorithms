@@ -20,7 +20,7 @@ public class LRUByHand {
     }
 
     // 定义 HashMap
-    private HashMap<Integer, Node> hashMap = new HashMap<Integer, Node>();
+    private final HashMap<Integer, Node> hashMap = new HashMap<Integer, Node>();
     // 定义基本属性
     private int capacity;
     // size 是已经有的、占用的大小，<= capacity
@@ -55,6 +55,7 @@ public class LRUByHand {
 
     private void addToTail(Node node) {
         // 在链表末尾增加一个节点
+        // 全程只与末尾发生关系，使用前一个节点也是用 tail.prev
         node.next = tail;
         // 以原先的末尾节点作为前一个节点
         node.prev = tail.prev;

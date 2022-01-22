@@ -7,7 +7,7 @@ public class LRUCache extends LinkedHashMap<Integer, Integer> {
     private int capacity;
 
     public static void main(String[] args) {
-        LRUCache lRUCache = new LRUCache(2);
+        LRUByHand lRUCache = new LRUByHand(2);
         lRUCache.put(1, 1); // 缓存是 {1=1}
         lRUCache.put(2, 2); // 缓存是 {1=1, 2=2}
         System.out.println(lRUCache.get(1));   // 返回 1

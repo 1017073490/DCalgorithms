@@ -1,6 +1,24 @@
 package com.zhangxing.algorithms.linked_list;
 
 public class MergeTwoSortedLists {
+    public ListNode mergeTwoListsMy(ListNode list1, ListNode list2) {
+        ListNode sentinel = new ListNode(-1);
+        ListNode curNode = sentinel;
+        while (list1 != null && list2 != null) {
+            if (list1.val <= list2.val) {
+                curNode.next = list1;
+                curNode = list1;
+                list1 = list1.next;
+            } else {
+                curNode.next = list2;
+                curNode = list2;
+                list2 = list2.next;
+            }
+        }
+        curNode.next = (list1==null)?list2:list1;
+        return sentinel.next;
+    }
+
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         // 迭代法
         // 首先，定义一个哨兵节点

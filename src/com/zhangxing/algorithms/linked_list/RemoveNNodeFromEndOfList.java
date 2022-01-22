@@ -7,6 +7,21 @@ public class RemoveNNodeFromEndOfList {
 
     }
 
+    public ListNode removeNthFromEndByMyself(ListNode head, int n) {
+        ListNode sentinel = new ListNode(-1, head);
+        ListNode former = sentinel;
+        ListNode latter = sentinel;
+        for (int i = 0; i < n + 1; i++) {
+            former = former.next;
+        }
+        while (former != null) {
+            former = former.next;
+            latter = latter.next;
+        }
+        latter.next = latter.next.next;
+        return sentinel.next;
+    }
+
     public ListNode removeNthFromEndAdvancedDoublePointer(ListNode head, int n) {
         ListNode sentinel = new ListNode(-1, head);
         // 左右指针始终保持固定距离
